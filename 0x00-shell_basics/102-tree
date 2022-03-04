@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #!/bin/ba 
 mkdir -p welcome/to/school
 sdas
 sd s
+=======
+#!/bin/bash 
+mkdir -p welcome/to/school
+>>>>>>> 687213e6a1437b23b862b585ce26c02b539283f5
