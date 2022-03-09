@@ -1,1 +1,0 @@
-the currnet working directory
