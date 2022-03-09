@@ -1,2 +1,0 @@
-#!/bin/bash
-head -15 iacta | tail -1 >> iacta 	
