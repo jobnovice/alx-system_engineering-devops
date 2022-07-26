@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#listing the contents of the current directory in long listing foramt
+LIST="$(ls -1)"
+for i in $LIST;
+do
+	echo "$i" | cut -d'-' -f2
+done
