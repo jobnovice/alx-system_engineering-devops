@@ -1,1 +1,1 @@
-#secure shell(ssh) for accessing remote servers
+secure shell(ssh) for accessing remote servers
