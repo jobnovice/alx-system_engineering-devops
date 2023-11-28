@@ -3,5 +3,5 @@
 
 #a puppet manifest that kills process using the exec resource along with the command to pkill
 exec {"killingAprocess":
-    command => "pkill -f killmenow"
+    command => 'pkill -f killmenow'
 }
