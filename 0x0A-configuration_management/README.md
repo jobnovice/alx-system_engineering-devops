@@ -1,0 +1,1 @@
+# a new project about configuration managment using puppet a robust tool to control and manage your infrastructure
