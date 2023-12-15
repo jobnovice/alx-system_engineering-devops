@@ -2,8 +2,8 @@
 # install nginx on a remote server
 # and configure it to serve a simple hello world
 
-apt-get -y update 
+apt-get -y update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
-echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 service nginx start
