@@ -9,7 +9,5 @@ new_conf="location / {
 }"
 
 sed -i "/location \/old_path {/,/}/c\\$new_conf" nginx_conf
-
-
-
 systemcl reload nginx
+sudo nginx start
