@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #configures the nginx server to handle the /redirects
 
-nginx_conf='/etc/nginx/sites-available/default
+nginx_conf='/etc/nginx/sites-available/default'
 
 
 new_conf="location / { 
