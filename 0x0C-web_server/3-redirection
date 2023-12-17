@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#configures the nginx server to handle the /redirects
+
+nginx_conf='/etc/nginx/sites-available/default
+
+
+new_conf="location / { 
+        rewrite ^/redirect_me(.*) http://www.google.com permanent   
+}"
+
+sed -i "/location \/old_path {/,/}/c\\$new_conf" nginx_conf
+
+
+
+systemcl reload nginx
