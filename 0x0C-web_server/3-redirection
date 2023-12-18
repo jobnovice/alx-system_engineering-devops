@@ -4,6 +4,10 @@ nginx_conf='/etc/nginx/sites-available/default'
 
 new_conf="location /redirect_me {
     rewrite ^/redirect_me(.*) http://www.google.com permanent;
+}
+
+location / {
+    try_files \$uri \$uri/ =404;
 }"
 
 # Use awk to append the new_conf after the 'location / {' line
@@ -14,8 +18,15 @@ if [ -e $nginx_conf.tmp ]; then
     # Replace the original configuration file with the modified one
     mv $nginx_conf.tmp $nginx_conf
 
-    # Restart Nginx to apply the changes
-    service nginx restart
+    # Test the Nginx configuration
+    nginx -t
+
+    # If the configuration test is successful, restart Nginx to apply the changes
+    if [ $? -eq 0 ]; then
+        service nginx restart
+    else
+        echo "Nginx configuration test failed. Check the error messages above."
+    fi
 else
     echo "Failed to create the temporary file."
 fi
