@@ -7,10 +7,15 @@ new_conf="location /redirect_me {
 }"
 
 # Use awk to append the new_conf after the 'location / {' line
-awk -v new_conf="$new_conf" '/location \/ {/{print; print new_conf; next}1' $nginx_conf > $nginx_conff
+awk -v new_conf="$new_conf" '/location \/ {/{print; print new_conf; next}1' $nginx_conf > $nginx_conf.tmp
 
-# Replace the original configuration file with the modified one
-mv $nginx_conff $nginx_conf
+# Check if the temporary file was created successfully
+if [ -e $nginx_conf.tmp ]; then
+    # Replace the original configuration file with the modified one
+    mv $nginx_conf.tmp $nginx_conf
 
-# Restart Nginx to apply the changes
-service nginx restart
+    # Restart Nginx to apply the changes
+    service nginx restart
+else
+    echo "Failed to create the temporary file."
+fi
