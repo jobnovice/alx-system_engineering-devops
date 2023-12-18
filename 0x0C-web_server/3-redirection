@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+apt-get -y update
+apt-get -y install nginx
+
 nginx_conf='/etc/nginx/sites-available/default'
 
 new_conf="location /redirect_me {
