@@ -10,23 +10,15 @@ location / {
     try_files \$uri \$uri/ =404;
 }"
 
-# Use awk to append the new_conf after the 'location / {' line
-awk -v new_conf="$new_conf" '/location \/ {/{print; print new_conf; next}1' $nginx_conf > $nginx_conf.tmp
+# Use sed to replace the old location block with the new one
+sed -i "/location \/ {/,/}/{s|location \/ {|$new_conf|" $nginx_conf
 
-# Check if the temporary file was created successfully
-if [ -e $nginx_conf.tmp ]; then
-    # Replace the original configuration file with the modified one
-    mv $nginx_conf.tmp $nginx_conf
+# Test the Nginx configuration
+nginx -t
 
-    # Test the Nginx configuration
-    nginx -t
-
-    # If the configuration test is successful, restart Nginx to apply the changes
-    if [ $? -eq 0 ]; then
-        service nginx restart
-    else
-        echo "Nginx configuration test failed. Check the error messages above."
-    fi
+# If the configuration test is successful, restart Nginx to apply the changes
+if [ $? -eq 0 ]; then
+    service nginx restart
 else
-    echo "Failed to create the temporary file."
+    echo "Nginx configuration test failed. Check the error messages above."
 fi
