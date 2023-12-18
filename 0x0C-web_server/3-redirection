@@ -2,14 +2,15 @@
 
 nginx_conf='/etc/nginx/sites-available/default'
 
-new_conf="location /old_path {
-    rewrite ^/old_path(.*) http://www.google.com permanent;
-}
-
-location / {
-    try_files \$uri \$uri/ =404;
+new_conf="location /redirect_me {
+    rewrite ^/redirect_me(.*) http://www.google.com permanent;
 }"
 
-sed -i "/location \/ {/,/}/{c\\$new_conf" $nginx_conf
+# Use awk to append the new_conf after the 'location / {' line
+awk -v new_conf="$new_conf" '/location \/ {/{print; print new_conf; next}1' $nginx_conf > $nginx_conf.new
 
+# Replace the original configuration file with the modified one
+mv $nginx_conf.new $nginx_conf
+
+# Restart Nginx to apply the changes
 service nginx restart
