@@ -9,5 +9,5 @@ new_conf="location / {
         rewrite ^/redirect_me(.*) http://www.google.com permanent   
 }"
 
-sed -i "/location \/old_path {/,/}/{c\\$new_conf" $nginx_conf
-service nginx start
+sudo sed -i "/location \/old_path {/,/}/{c\\$new_conf" $nginx_conf
+sudo service nginx start
