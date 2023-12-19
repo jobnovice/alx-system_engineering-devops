@@ -7,6 +7,8 @@ sudo ufw allow 'Nginx HTTP'
 mkdir -p /var/www/html/
 sudo chmod -R 755 /var/www
 echo 'Hello World!' > /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404page.html
+
 SERVER_CONFIG=\
 "server {
 	listen 80 default_server;
@@ -14,6 +16,12 @@ SERVER_CONFIG=\
 	root /var/www/html;
 	index index.html index.htm index.nginx-debian.html;
 	server_name _;
+    error_page 404 /custom_404page.html;
+
+    location = /custom_404page.html {
+        root /usr/share/nginx/html;
+        internal;
+    }
 	location / {
 		try_files \$uri \$uri/ =404;
 	}
