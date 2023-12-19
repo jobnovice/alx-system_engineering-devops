@@ -1,27 +1,31 @@
 #!/usr/bin/env bash
+# This script Configure the Nginx server so that /redirect_me is redirecting to another page.
 
-apt-get -y update
+apt-get update
 apt-get -y install nginx
-
-nginx_conf='/etc/nginx/sites-available/default'
-
-new_conf="location /redirect_me {
-    rewrite ^/redirect_me(.*) http://www.google.com permanent;
-}
-
-location / {
-    try_files \$uri \$uri/ =404;
+sudo ufw allow 'Nginx HTTP'
+mkdir -p /var/www/html/
+sudo chmod -R 755 /var/www
+echo 'Hello World!' > /var/www/html/index.html
+SERVER_CONFIG=\
+"server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+	if (\$request_filename ~ redirect_me){
+		rewrite ^ https://sketchfab.com/bluepeno/models permanent;
+	}
 }"
 
-# Use sed to replace the old location block with the new one
-sudo sed -i '/location \/ {/,/}/{/location \/ {/{N;s/location \/ {\n/'"$new_conf"'\n/}}' $nginx_conf
+bash -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
 
-# Test the Nginx configuration
-nginx -t
-
-# If the configuration test is successful, restart Nginx to apply the changes
-if [ $? -eq 0 ]; then
-   sudo service nginx restart
+if [ "$(pgrep -c nginx)" -le 0 ]; then
+	service nginx start
 else
-    echo "Nginx configuration test failed. Check the error messages above."
+	service nginx restart
 fi
