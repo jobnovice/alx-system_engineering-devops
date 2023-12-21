@@ -1,0 +1,21 @@
+docker exec -it 47ca3994a491 /bin/bash
+cd /etc/apache2/sites-available
+cd /var/www/html
+nano index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Holberton</title>
+</head>
+<body>
+    <h1>Hello Holberton</h1>
+</body>
+</html>
+nano 000-default.conf
+<VirtualHost *:80>
+    DocumentRoot /var/www/html
+    # other configurations...
+</VirtualHost>
+
+service apache2 restart
+exit
