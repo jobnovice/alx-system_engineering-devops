@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+# nginx must be running and listening on port 80
+service start nginx
