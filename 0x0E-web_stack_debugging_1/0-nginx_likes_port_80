@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # nginx must be running and listening on port 80
 service start nginx
+ufw allow 'Nginx HTTP'
