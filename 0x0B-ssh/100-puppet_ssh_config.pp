@@ -1,3 +1,4 @@
+#a puppet manifest that configures a web server
 file { '/home/job/.ssh':
   ensure => directory,
   mode   => '0700',
