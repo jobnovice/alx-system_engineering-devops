@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#checking if nginx is listening on port 80 and running
+
+sudo nginx restart
