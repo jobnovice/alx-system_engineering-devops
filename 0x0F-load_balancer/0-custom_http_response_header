@@ -7,7 +7,7 @@ sudo apt-get install -y nginx
 hostname_value=$(hostname)
 
 # Create a custom configuration file for Nginx
-echo 'server {' | sudo tee /etc/nginx/sites-available/default
+echo 'server {' | sudo tee -a /etc/nginx/sites-available/default
 echo '    listen 80 default_server;' | sudo tee -a /etc/nginx/sites-available/default
 echo '    server_name _;' | sudo tee -a /etc/nginx/sites-available/default
 echo "    add_header X-Served-By $hostname_value;" | sudo tee -a /etc/nginx/sites-available/default
