@@ -1,20 +1,15 @@
 #!/usr/bin/env bash
-# Update the package list
-sudo apt-get update
-# Install Nginx
-sudo apt-get install -y nginx
-# Get the hostname of the server
-hostname_value=$(hostname)
+# Configure Nginx so that its HTTP response contains a custom header
+# HTTP response contains a custom header (on web-01 and web-02)
+var=$(hostname)
+new_string="error_page 404 \/custom_404.html;\n location \/redirect_me {\n return 301 \$scheme:\/\/www.google.com;"
+new_string2="server {\n\tadd_header X-Served-By $var;"
 
-# Create a custom configuration file for Nginx
-echo 'server {' | sudo tee -a /etc/nginx/sites-available/default
-echo '    listen 80 default_server;' | sudo tee -a /etc/nginx/sites-available/default
-echo '    server_name _;' | sudo tee -a /etc/nginx/sites-available/default
-echo "    add_header X-Served-By $hostname_value;" | sudo tee -a /etc/nginx/sites-available/default
-echo '    location / {' | sudo tee -a /etc/nginx/sites-available/default
-echo '        # Your additional configuration if needed' | sudo tee -a /etc/nginx/sites-available/default
-echo '    }' | sudo tee -a /etc/nginx/sites-available/default
-echo '}' | sudo tee -a /etc/nginx/sites-available/default
-
-# Restart Nginx to apply changes
-sudo service nginx restart
+apt-get update -y
+apt-get install nginx -y
+echo "Hello World!" > /usr/share/nginx/html/index.html
+mkdir -p /var/www/html
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+sudo sed -i -E "s/^[^#]+location \/ \{/$new_string/" /etc/nginx/sites-available/default
+sudo sed -i -E "s/^server \{/$new_string2/" /etc/nginx/sites-available/default
+sudo service nginx start
