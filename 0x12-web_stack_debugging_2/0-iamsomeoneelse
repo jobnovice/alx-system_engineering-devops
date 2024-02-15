@@ -5,4 +5,4 @@ if [ $# -gt 1 ]; then
 	exit 1
 fi
 
-echo whoami "$1"
+whoami $0
