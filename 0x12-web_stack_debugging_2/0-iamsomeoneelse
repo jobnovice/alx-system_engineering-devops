@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# a script that runs the whoami command and display the user
+if [ $# -gt 1 ]; then
+	echo "Usage: $0 USERNAME"
+	exit 1
+fi
+
+echo whoami "$1"
