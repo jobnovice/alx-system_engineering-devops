@@ -6,4 +6,4 @@ if [ $# -ne 1 ]; then
 fi
 
 username=$1
-sudo -u $username whoami
+$username whoami
