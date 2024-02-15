@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# a script that runs the whoami command and display the user
-if [ $# -gt 1 ]; then
-	echo "Usage: $0 USERNAME"
-	exit 1
+# Check if the user argument is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
 fi
 
-whoami $0
+username=$1
+sudo -u $username whoami
