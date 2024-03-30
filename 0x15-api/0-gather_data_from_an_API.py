@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """using API to get data and display it in a specific format"""
 
-import sys
 import requests
+import sys
 
 if len(sys.argv) != 2:
     print("Invalid input. Please provide the employee ID.")
@@ -30,4 +30,4 @@ print(f"Employee {d2['name']} is done with tasks({completed_task}/{len(data)}):"
 
 for i in data:
      if i["completed"]:
-           print("\t ", i["title"])
+           print("\t ", i["title"])		
