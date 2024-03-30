@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """using API to get data and display it in a specific format"""
 
-import requests
 import sys
+import requests
 
 if len(sys.argv) != 2:
     print("Invalid input. Please provide the employee ID.")
