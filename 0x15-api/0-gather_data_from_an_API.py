@@ -23,11 +23,12 @@ d2 = r2.json()
 
 completed_task = 0
 for i in data:
-	if i["completed"]:
-		completed_task += 1
+    if i["completed"]:
+        completed_task += 1
 
-print(f"Employee {d2['name']} is done with tasks({completed_task}/{len(data)}):")
+print(f"Employee {d2['name']}" +
+      f"is done with tasks({completed_task}/{len(data)}):")
 
 for i in data:
-     if i["completed"]:
-           print("\t ", i["title"])		
+    if i["completed"]:
+        print("\t ", i["title"])
