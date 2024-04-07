@@ -14,8 +14,10 @@ except ValueError:
     print("Employee ID must be an integer.")
     sys.exit(1)
 
-response = requests.get(f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos")
-r2 = requests.get(f"https://jsonplaceholder.typicode.com/users/{employee_id}")
+response = requests.get(
+      f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos")
+r2 = requests.get(
+      f"https://jsonplaceholder.typicode.com/users/{employee_id}")
 data = response.json()
 d2 = r2.json()
 
