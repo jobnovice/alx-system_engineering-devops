@@ -18,7 +18,7 @@ todos = todos_list.json()
 #define the fields
 fields = ["userId", "username", "completed", "title"]
 
-csv_file = "USER_ID.csv"
+csv_file = f"{user_id}.csv"
 
 with open(csv_file, 'w', newline='') as file:
 	writer = csv.DictWriter(file, fieldnames=fields)
