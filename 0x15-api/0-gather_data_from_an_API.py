@@ -27,7 +27,7 @@ for i in data:
         completed_task += 1
 
 print(f"Employee {d2['name']}" +
-      f"is done with tasks({completed_task}/{len(data)}):")
+      f" is done with tasks({completed_task}/{len(data)}):")
 
 for i in data:
     if i["completed"]:
