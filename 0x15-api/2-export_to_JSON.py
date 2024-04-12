@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Export data to JSON format"""
 
-import sys
-import requests
 import json
+import requests
+import sys
 
 if len(sys.argv) < 2:
     print("Usage: python script.py <user_id>")
