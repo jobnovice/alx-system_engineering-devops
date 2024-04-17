@@ -6,9 +6,9 @@ $virtual_host_file = 'example.com.conf' # Replace with the actual name of your v
 
 # Ensure the virtual host file is present and contains correct configuration
 file { "${apache_conf_dir}/${virtual_host_file}":
-  ensure => file,
+  ensure  => file,
   content => template('apache/virtual_host.conf.erb'), # You'll need to create this template with the correct configuration
-  notify => Service['apache2'], # Restart Apache service when the configuration file changes
+  notify  => Service['apache2'], # Restart Apache service when the configuration file changes
 }
 
 # Ensure Apache service is running and enabled
