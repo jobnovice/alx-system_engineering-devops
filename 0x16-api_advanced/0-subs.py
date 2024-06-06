@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """created a module that accpets a subreddit as a parameter returns the number
 of subscriber"""
+import json
 import requests
+import sys
 
 
 def number_of_subscribers(subreddit):
