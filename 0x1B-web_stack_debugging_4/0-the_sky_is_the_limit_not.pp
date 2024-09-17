@@ -11,14 +11,14 @@ file { '/etc/nginx/nginx.conf':
 
 # Ensure the Nginx service is running and enabled to start at boot
 service { 'nginx':
-  ensure    => running,
-  enable    => true,
-  require   => Package['nginx'],
+  ensure  => running,
+  enable  => true,
+  require => Package['nginx'],
 }
 
 # Define the contents of nginx.conf to fix the load issue
 file { '/etc/nginx/nginx.conf':
-  content => @("EOF"),
+  content => @('EOF'),
     user  nginx;
     worker_processes  auto;
     error_log  /var/log/nginx/error.log;
@@ -73,7 +73,7 @@ file { '/etc/nginx/nginx.conf':
 
         # Disable Gzip for improved load testing performance
         gzip on;
-        gzip_disable "msie6";
+        gzip_disable 'msie6';
       }
     }
   | EOF
