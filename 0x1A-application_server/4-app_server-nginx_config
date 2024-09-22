@@ -1,0 +1,10 @@
+# a new configuration file defined to handle new route
+server {
+        listen 80;
+        server_name 127.0.0.1 100.26.156.157;
+
+        location /api/{
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5002/api/;
+        }
+}
